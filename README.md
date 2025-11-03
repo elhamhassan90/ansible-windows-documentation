@@ -44,10 +44,7 @@ pip install "pywinrm>=0.3.0"
 pip show pywinrm
 ```
 
-### 3. Vault handling:
-For secure usage, we use `ansible-vault` to encrypt sensitive variables and either pass the password at runtime (`--ask-vault-pass`) or supply a `--vault-password-file` that is excluded from version control.
--------------------
-### Vault password: create, use, and secure (easy steps)
+### 3. **Handling Vault password:** create, use, and secure (easy steps)
 
 This project uses `ansible-vault` to protect secrets. Below are simple, practical steps to create a vault password file, configure `ansible.cfg` to use it, and run playbooks safely.
 
