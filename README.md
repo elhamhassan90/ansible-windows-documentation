@@ -239,7 +239,13 @@ CHILD-2,N/A,N/A,N/A,N/A,Unreachable
 
     Infrastructure documentation and version control using GitHub
 
-👩‍💻 Author
 
-Elham Hasan
-LinkedIn Profile
+## 👩‍💻 Author
+**Elham Hasan**  
+🔧 DevOps Enthusiast | System Administrator | Automation Engineer | IT Support Network Egineer 
+🚀 Built locally on CentOS and Windows Servers  
+📬 GitHub: https://github.com/elhamhassan90  
+🔗 LinkedIn: www.linkedin.com/in/elham-hasan-6b029433a  
+---
+
+⭐ *If you found this useful or inspiring, star the repo and con
