@@ -11,8 +11,8 @@ The goal was to simplify server administration tasks such as collecting time, ti
 ## 🧩 Environment Setup
 - **Control Node:** CentOS / RHEL Server with Ansible installed  
 - **Managed Nodes:** Windows Servers (Domain joined)  
-- **Connection Method:** WinRM (Ansible connecting to Windows hosts)  
-
+- **Connection Method for WindowsServers:** WinRM (Ansible connecting to Windows hosts) by activating WinRM on windowserver
+- **Connection Method for Ansible:** pywinrm package installed on linux so ansible can control winrm
 ---
 
 ## ⚙️ Configuration Steps
