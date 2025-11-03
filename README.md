@@ -43,6 +43,16 @@ sudo apt install python3-pip -y
 pip install "pywinrm>=0.3.0"
 pip show pywinrm
 ```
+
+### 3. Vault handling:
+- `#vault_password_file = /home/ans/windows/group_vars/all/vault_pass.txt` — this line shows how we can point Ansible to a file that returns the vault password. In this repository the line is commented out to avoid exposing secrets.
+- For secure usage, we use `ansible-vault` to encrypt sensitive variables and either pass the password at runtime (`--ask-vault-pass`) or supply a `--vault-password-file` that is excluded from version control.
+
+
+
+
+
+
 ### 2. Configure ansible.cfg File (Configuration file of ansible)
 
 ```
