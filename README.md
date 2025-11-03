@@ -44,7 +44,7 @@ pip install "pywinrm>=0.3.0"
 pip show pywinrm
 ```
 
-## 🔐 Handling Vault Password: Create, Use, and Secure (Easy Steps)
+### 3. 🔐 Handling Vault Password: Create, Use, and Secure (Easy Steps)
 
 This project uses **Ansible Vault** to protect sensitive data and credentials.  
 Below are simple, practical steps to create a vault password file, configure `ansible.cfg` to use it, and run playbooks safely.
@@ -88,79 +88,10 @@ ansible-playbook -i inventory.ini playbook.yml --vault-password-file /path/to/an
 ```
 
 
+### 4. Configure Inventory File
+Created an Ansible inventory file that defines Windows hosts and connection settings.
+Sensitive credentials (like ansible_password) are securely stored in Ansible Vault and referenced here as variables.
 
-
-### 3. **Handling Vault password:** create, use, and secure (easy steps)
-
-This project uses `ansible-vault` to protect secrets. Below are simple, practical steps to create a vault password file, configure `ansible.cfg` to use it, and run playbooks safely.
-
-#### 1) Create a vault password file (local, private)
-Create a small file that contains only the vault password. Do this on your control machine.
-
-```bash
-# create the file and add the password (replace <your-password> with your real password)
-echo '<your-password>' > The-Path-of-ansible_vault_pass
-
-# restrict file permissions so only you can read it
-chmod 600 The-Path-of-ansible_vault_pass
-```
-
-#### 2) Tell Ansible to use the Vault-Password file
-
-Add or uncomment this line in your project ansible.cfg:
-```
-[defaults]
-vault_password_file = The-Path-of-ansible_vault_pass
-```
-
-
-
-
-
-
-
-
-
-
-
-```bash
-# create a vaulted file interactively
-ansible-vault create group_vars/all/vault.yml
-
-# edit an existing vaulted file
-ansible-vault edit group_vars/all/vault.yml
-
-# run playbook asking for vault password
-ansible-playbook -i inventory.ini playbook.yml --ask-vault-pass
-
-# run playbook with a password file (do NOT commit this file)
-ansible-playbook -i inventory.ini playbook.yml --vault-password-file /path/to/vault_pass.txt
-```
-
-
-
-### 2. Configure ansible.cfg File (Configuration file of ansible)
-
-```
-cat ansible.cfg
-[defaults]
-#vault_password_file = /home/ans/windows/group_vars/all/vault_pass.txt
-forks = 10
-inventory = ./inventory.ini
-host_key_checking = False
-deprecation_warnings = False
-connection_timeout = 120
-operation_timeout_sec = 120
-[privilege_escalation]
-
-[connection]
-pipelining = True
-```
-
-
-### 2. Configure Inventory File
-
-Created an Ansible inventory file with Windows server hostnames and connection variables:
 ```
 [all:vars]
 ansible_user=domainname\ansible
@@ -170,20 +101,11 @@ ansible_winrm_port=5985
 ansible_winrm_server_cert_validation=ignore
 ansible_winrm_transport=ntlm
 
-[jump_servers]
-WAVZ-JUMP-SERVE ansible_host=172.27.225.4
-
-[windows]
-APPSERVER
-CHILD-1
-DEV-DB
-DIM-WEBSERVER
-
-[windows:vars]
-ansible_user=Administrator
-ansible_password=YourPassword
-ansible_connection=winrm
-ansible_winrm_transport=basic
+[servers-group1]
+servername1 ansible_host=ip
+[servers-group2]
+servername2 ansible_host=ip
+```
 
 ### 3. Create Playbook to Collect Time Information
 
