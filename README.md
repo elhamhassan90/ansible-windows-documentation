@@ -232,6 +232,8 @@ Unreachable hosts will appear like:
 ```
 CHILD-2,N/A,N/A,N/A,N/A,Unreachable
 ```
+<img width="1031" height="1012" alt="image" src="https://github.com/user-attachments/assets/dfd8b9ac-c75f-436b-b31d-0f643de5ec92" />
+
 
 ## 🧠 Skills Demonstrated
 
