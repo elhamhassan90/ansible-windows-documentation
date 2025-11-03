@@ -24,7 +24,7 @@ winrm quickconfig
 winrm set winrm/config/service/Auth '@{Basic="true"}'
 winrm set winrm/config/service '@{AllowUnencrypted="true"}'
 
-2. Configure Inventory File
+### 2. Configure Inventory File
 
 Created an Ansible inventory file with Windows server hostnames and connection variables:
 
@@ -40,7 +40,7 @@ ansible_password=YourPassword
 ansible_connection=winrm
 ansible_winrm_transport=basic
 
-3. Create Playbook to Collect Time Information
+### 3. Create Playbook to Collect Time Information
 
 Developed an Ansible Playbook that retrieves:
 
