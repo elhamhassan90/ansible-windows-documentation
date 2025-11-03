@@ -239,7 +239,7 @@ CHILD-2,N/A,N/A,N/A,N/A,Unreachable
 
     🔹 YAML scripting for playbooks
 
-    **🔹Remote management via WinRM**
+    🔹 Remote management via WinRM
 
     🔹 Basic PowerShell integration
 
