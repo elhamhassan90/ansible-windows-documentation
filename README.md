@@ -193,7 +193,6 @@ Developed an Ansible Playbook that retrieves:
         msg:
           - "✅ Final CSV saved at {{ output_dir }}/time_check_results.csv"
           - "🧮 Total unique servers: {{ total_servers.stdout }}"
-[ans@master-linux windows-elham]$
 ```
 
 
