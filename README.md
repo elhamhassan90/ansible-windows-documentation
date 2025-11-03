@@ -21,7 +21,7 @@ The goal was to simplify server administration tasks such as collecting time, ti
 Configure WinRM service to allow Ansible connections securely:
 
 open powershell as administrator 
----------------------------------
+
 ```
 Enable-PSRemoting -Force
 Set-Item WSMan:\localhost\Service\Auth\Basic -Value $true
