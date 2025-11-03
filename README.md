@@ -1,4 +1,3 @@
-# ansible-windows-documentation
 # Windows Servers Automation using Ansible 
 **“This project showcases real-world automation of Windows server management using Ansible.”**
 
@@ -249,10 +248,10 @@ CHILD-2,N/A,N/A,N/A,N/A,Unreachable
 
 ## 👩‍💻 Author
 **Elham Hasan**  
-🔧 DevOps Enthusiast | System Administrator | Automation Engineer | IT Network Egineer 
+🔧 DevOps Enthusiast | System Administrator | Automation Engineer | IT Network Engineer 
 🚀 Built locally on CentOS and Windows Servers  
 📬 GitHub: https://github.com/elhamhassan90  
 🔗 LinkedIn: www.linkedin.com/in/elham-hasan-6b029433a  
 ---
 
-⭐ *If you found this useful or inspiring, star the repo and con
+⭐ *If you found this useful or inspiring, star the repo and connect with me on LinkedIn!*
