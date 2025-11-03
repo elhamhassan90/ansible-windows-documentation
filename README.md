@@ -46,8 +46,40 @@ pip show pywinrm
 
 ### 3. Vault handling:
 For secure usage, we use `ansible-vault` to encrypt sensitive variables and either pass the password at runtime (`--ask-vault-pass`) or supply a `--vault-password-file` that is excluded from version control.
+-------------------
+### Vault password: create, use, and secure (easy steps)
 
-**Example commands:**
+This project uses `ansible-vault` to protect secrets. Below are simple, practical steps to create a vault password file, configure `ansible.cfg` to use it, and run playbooks safely.
+
+#### 1) Create a vault password file (local, private)
+Create a small file that contains only the vault password. Do this on your control machine.
+
+```bash
+# create the file and add the password (replace <your-password> with your real password)
+echo '<your-password>' > The-Path-of-ansible_vault_pass
+
+# restrict file permissions so only you can read it
+chmod 600 The-Path-of-ansible_vault_pass
+```
+
+#### 2) Tell Ansible to use the Vault-Password file
+
+Add or uncomment this line in your project ansible.cfg:
+```
+[defaults]
+vault_password_file = The-Path-of-ansible_vault_pass
+```
+
+
+
+
+
+
+
+
+
+
+
 ```bash
 # create a vaulted file interactively
 ansible-vault create group_vars/all/vault.yml
