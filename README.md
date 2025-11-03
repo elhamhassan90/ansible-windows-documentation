@@ -89,8 +89,8 @@ ansible-playbook -i inventory.ini playbook.yml --vault-password-file /path/to/an
 
 
 ### 4. Configure Inventory File
-Created an Ansible inventory file that defines Windows hosts and connection settings.
-Sensitive credentials (like ansible_password) are securely stored in Ansible Vault and referenced here as variables.
+Created an **Ansible inventory file**  that defines Windows hosts and connection settings.
+Sensitive credentials (like ansible_password) are securely stored in **Ansible Vault** and referenced here as variables.
 
 ```
 [all:vars]
@@ -102,9 +102,10 @@ ansible_winrm_server_cert_validation=ignore
 ansible_winrm_transport=ntlm
 
 [servers-group1]
-servername1 ansible_host=ip
+servername1 ansible_host=<IP-address>
+
 [servers-group2]
-servername2 ansible_host=ip
+servername2 ansible_host=<IP-address>
 ```
 
 ### 3. Create Playbook to Collect Time Information
