@@ -10,11 +10,19 @@ The final result is a single CSV report summarizing all Windows servers’ time 
 ---
 
 ## 🧩 Environment Setup
-- **Control Node:** CentOS / RHEL Server with Ansible installed  
-- **Managed Nodes:** Windows Servers (Domain joined)  
-- **Connection Method for WindowsServers:** WinRM (Ansible connecting to Windows hosts) by activating WinRM on windowserver
-- **Connection Method for Ansible:** pywinrm package installed on linux so ansible can control winrm
-- **All results** are stored under /home/ans/windows-elham/results on the Ansible control node.
+
+- **Control Node:** CentOS / RHEL Server with Ansible installed
+
+- **Managed Nodes:** Windows Servers (Domain joined)
+
+- **Connection Method (Windows):** WinRM enabled on each Windows Server
+
+- **Connection Method (Ansible):** pywinrm package installed on Linux control node
+
+- **Network Requirement:** WinRM ports 5985 (HTTP) and 5986 (HTTPS) must be open between Ansible and Windows servers
+
+- **Output Directory:** All results are stored under /home/ans/windows-elham/results on the Ansible control node
+  
 
 ## ⚙️ Configuration Steps
 
