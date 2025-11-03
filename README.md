@@ -31,6 +31,19 @@ Restart-Service WinRM
 Set-NetFirewallRule -Name "WINRM-HTTP-In-TCP" -Enabled True
 ```
 
+### 2. Configure Ansible/Linux Server 
+
+```
+#ansible install
+sudo dnf install epel-release -y  
+sudo dnf install ansible -y
+ansible --version #check ansible installed
+#pywinrm install (package requird for linux to deal with windows)
+sudo apt install python3-pip -y
+pip install "pywinrm>=0.3.0"
+pip show pywinrm
+```
+
 ### 2. Configure Inventory File
 
 Created an Ansible inventory file with Windows server hostnames and connection variables:
