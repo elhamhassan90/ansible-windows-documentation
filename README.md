@@ -204,16 +204,20 @@ ansible-playbook -i inventory.ini time_check.yml --vault-password-file /path/to/
 
 The playbook writes per-host CSV files (one per host) to:
 ``` /home/ans/windows-elham/results/ ```
+
 Then it creates the final consolidated file:
 ``` /home/ans/windows-elham/results/time_check_results.csv ```
+
 CSV columns:
 ```
 Server,Date,Timezone,W32Time_Status,StartType,ConnectionStatus
 ```
+
 Example row:
 ```
 APPSERVER,2025-10-30 11:20:12,Egypt Standard Time,Running,Auto,Reachable
 ```
+
 Unreachable hosts will appear like:
 ```
 CHILD-2,N/A,N/A,N/A,N/A,Unreachable
