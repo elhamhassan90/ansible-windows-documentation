@@ -107,6 +107,7 @@ ansible_password="{{ ansible_password }}"
 ansible_connection=winrm
 ansible_winrm_port=5985
 ansible_winrm_server_cert_validation=ignore
+##ansible_winrm_transport=basic  ##for unjoined-domain
 ansible_winrm_transport=ntlm
 
 [servers-group1]
