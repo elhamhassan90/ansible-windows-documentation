@@ -23,6 +23,7 @@ Configured WinRM service to allow Ansible connections securely:
 winrm quickconfig
 winrm set winrm/config/service/Auth '@{Basic="true"}'
 winrm set winrm/config/service '@{AllowUnencrypted="true"}'
+```
 
 ### 2. Configure Inventory File
 
