@@ -43,10 +43,39 @@ sudo apt install python3-pip -y
 pip install "pywinrm>=0.3.0"
 pip show pywinrm
 ```
+### 2. Configure ansible.cfg File (Configuration file of ansible)
+
+```
+cat ansible.cfg
+[defaults]
+#vault_password_file = /home/ans/windows/group_vars/all/vault_pass.txt
+forks = 10
+inventory = ./inventory.ini
+host_key_checking = False
+deprecation_warnings = False
+connection_timeout = 120
+operation_timeout_sec = 120
+[privilege_escalation]
+
+[connection]
+pipelining = True
+```
+
 
 ### 2. Configure Inventory File
 
 Created an Ansible inventory file with Windows server hostnames and connection variables:
+```
+[all:vars]
+ansible_user=domainname\ansible
+ansible_password="{{ ansible_password }}"
+ansible_connection=winrm
+ansible_winrm_port=5985
+ansible_winrm_server_cert_validation=ignore
+ansible_winrm_transport=ntlm
+
+[jump_servers]
+WAVZ-JUMP-SERVE ansible_host=172.27.225.4
 
 [windows]
 APPSERVER
