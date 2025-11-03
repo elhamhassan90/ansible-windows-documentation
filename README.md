@@ -45,11 +45,22 @@ pip show pywinrm
 ```
 
 ### 3. Vault handling:
-- `#vault_password_file = /home/ans/windows/group_vars/all/vault_pass.txt` — this line shows how we can point Ansible to a file that returns the vault password. In this repository the line is commented out to avoid exposing secrets.
-- For secure usage, we use `ansible-vault` to encrypt sensitive variables and either pass the password at runtime (`--ask-vault-pass`) or supply a `--vault-password-file` that is excluded from version control.
+For secure usage, we use `ansible-vault` to encrypt sensitive variables and either pass the password at runtime (`--ask-vault-pass`) or supply a `--vault-password-file` that is excluded from version control.
 
+**Example commands:**
+```bash
+# create a vaulted file interactively
+ansible-vault create group_vars/all/vault.yml
 
+# edit an existing vaulted file
+ansible-vault edit group_vars/all/vault.yml
 
+# run playbook asking for vault password
+ansible-playbook -i inventory.ini playbook.yml --ask-vault-pass
+
+# run playbook with a password file (do NOT commit this file)
+ansible-playbook -i inventory.ini playbook.yml --vault-password-file /path/to/vault_pass.txt
+```
 
 
 
