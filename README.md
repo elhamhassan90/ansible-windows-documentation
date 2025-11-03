@@ -60,7 +60,7 @@ Below are simple, practical steps to create a vault password file, configure `an
 
 ---
 
-### * Create a Vault Password File (Local & Private)
+### -  Create a Vault Password File (Local & Private)
 
 Create a small file that contains only the vault password.  
 Do this on your **control machine**.
@@ -72,14 +72,14 @@ echo '<your-password>' > /path/to/ansible_vault_pass.txt
 # Restrict file permissions so only you can read it
 chmod 600 /path/to/ansible_vault_pass.txt
 ```
-### * Configure Ansible to Use the Vault Password File
+### - Configure Ansible to Use the Vault Password File
 
 Open your project’s ansible.cfg file and add (or uncomment) this line under [defaults]:
 ```
 [defaults]
 vault_password_file = /path/to/ansible_vault_pass.txt
 ```
-### * Create or Edit Vaulted Files
+### - Create or Edit Vaulted Files
 ```
 # Create a new vaulted file interactively
 ansible-vault create group_vars/all/vault.yml
@@ -87,7 +87,7 @@ ansible-vault create group_vars/all/vault.yml
 # Edit an existing vaulted file
 ansible-vault edit group_vars/all/vault.yml
 ```
-### * Run Playbooks with Vault
+### - Run Playbooks with Vault
 ```
 # Run playbook and ask for vault password interactively
 ansible-playbook -i inventory.ini playbook.yml --ask-vault-pass
@@ -235,21 +235,21 @@ CHILD-2,N/A,N/A,N/A,N/A,Unreachable
 
 ## 🧠 Skills Demonstrated
 
-    Ansible for Windows automation
+    - **Ansible for Windows automation**
 
-    YAML scripting for playbooks
+    - **YAML scripting for playbooks**
 
-    Remote management via WinRM
+    - **Remote management via WinRM**
 
-    Basic PowerShell integration
+    - **Basic PowerShell integration**
 
-    Infrastructure documentation and version control using GitHub
+    - **Infrastructure documentation and version control using GitHub**
 
 **“This project showcases real-world automation of Windows server management using Ansible.”**
 
 ## 👩‍💻 Author
 **Elham Hasan**  
-🔧 DevOps Enthusiast | System Administrator | Automation Engineer | IT Support Network Egineer 
+🔧 DevOps Enthusiast | System Administrator | Automation Engineer | IT Network Egineer 
 🚀 Built locally on CentOS and Windows Servers  
 📬 GitHub: https://github.com/elhamhassan90  
 🔗 LinkedIn: www.linkedin.com/in/elham-hasan-6b029433a  
