@@ -18,7 +18,8 @@ The goal was to simplify server administration tasks such as collecting time, ti
 ## ⚙️ Configuration Steps
 
 ### 1. Enable WinRM on Windows Servers
-Configured WinRM service to allow Ansible connections securely:
+Configure WinRM service to allow Ansible connections securely:
+
 open powershell as administrator 
 ---------------------------------
 ```
