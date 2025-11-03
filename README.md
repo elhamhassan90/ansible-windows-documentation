@@ -19,10 +19,15 @@ The goal was to simplify server administration tasks such as collecting time, ti
 
 ### 1. Enable WinRM on Windows Servers
 Configured WinRM service to allow Ansible connections securely:
-```powershell
-winrm quickconfig
-winrm set winrm/config/service/Auth '@{Basic="true"}'
-winrm set winrm/config/service '@{AllowUnencrypted="true"}'
+open powershell as administrator 
+---------------------------------
+```
+Enable-PSRemoting -Force
+Set-Item WSMan:\localhost\Service\Auth\Basic -Value $true
+Set-Item WSMan:\localhost\Service\AllowUnencrypted -Value $true
+Set-Item -Path WSMan:\localhost\Client\AllowUnencrypted -Value $true
+Restart-Service WinRM
+Set-NetFirewallRule -Name "WINRM-HTTP-In-TCP" -Enabled True
 ```
 
 ### 2. Configure Inventory File
