@@ -1,10 +1,11 @@
 # ansible-windows-documentation
-ansible-windows-documentation
-# Windows Servers Automation using Ansible
+# Windows Servers Automation using Ansible 
+**“This project showcases real-world automation of Windows server management using Ansible.”**
 
 ## 📘 Overview
 This documentation describes the steps I implemented at work to automate Windows Server management using **Ansible**.  
 The goal was to simplify server administration tasks such as collecting time, timezone, and Windows Time Service (W32Time) status from multiple servers simultaneously.
+The final result is a single CSV report summarizing all Windows servers’ time and W32Time status.
 
 ---
 
@@ -13,7 +14,7 @@ The goal was to simplify server administration tasks such as collecting time, ti
 - **Managed Nodes:** Windows Servers (Domain joined)  
 - **Connection Method for WindowsServers:** WinRM (Ansible connecting to Windows hosts) by activating WinRM on windowserver
 - **Connection Method for Ansible:** pywinrm package installed on linux so ansible can control winrm
----
+- **All results** are stored under /home/ans/windows-elham/results on the Ansible control node.
 
 ## ⚙️ Configuration Steps
 
@@ -189,7 +190,7 @@ Copy this file into your repo as time_check.yml. This is the full playbook that 
 ```
 
  
-🏁 How to run ?
+## 🏁 How to run ?
 
 From the control node, run:
 ```
@@ -199,8 +200,9 @@ ansible-playbook -i inventory.ini time_check.yml --ask-vault-pass
 # Option B: use a vault password file (no prompt)
 ansible-playbook -i inventory.ini time_check.yml --vault-password-file /path/to/ansible_vault_pass.txt
 ```
+**This playbook can be scheduled to run regularly (daily/weekly) to monitor time synchronization across servers.**
 
-📄 Output
+## 📄 Output
 
 The playbook writes per-host CSV files (one per host) to:
 ``` /home/ans/windows-elham/results/ ```
@@ -223,11 +225,7 @@ Unreachable hosts will appear like:
 CHILD-2,N/A,N/A,N/A,N/A,Unreachable
 ```
 
-
-
-
-
-🧠 Skills Demonstrated
+## 🧠 Skills Demonstrated
 
     Ansible for Windows automation
 
@@ -239,6 +237,7 @@ CHILD-2,N/A,N/A,N/A,N/A,Unreachable
 
     Infrastructure documentation and version control using GitHub
 
+**“This project showcases real-world automation of Windows server management using Ansible.”**
 
 ## 👩‍💻 Author
 **Elham Hasan**  
