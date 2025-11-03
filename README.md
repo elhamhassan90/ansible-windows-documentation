@@ -108,16 +108,9 @@ servername1 ansible_host=<IP-address>
 servername2 ansible_host=<IP-address>
 ```
 
-### 3. Create Playbook to Collect Time Information
+### 3. Create Playbook (time_check.yml) to Collect Time Information
 
-Developed an Ansible Playbook that retrieves:
-
-    Current system time
-
-    Timezone configuration
-
-    Windows Time Service (W32Time) status
-
+Copy this file into your repo as time_check.yml. This is the full playbook that collects time, timezone and W32Time status and produces a combined CSV.
 ```
 ---
 - name: Collect time, timezone, and W32Time info from selected Windows groups (unique hosts)
@@ -195,30 +188,40 @@ Developed an Ansible Playbook that retrieves:
           - "🧮 Total unique servers: {{ total_servers.stdout }}"
 ```
 
+ 
+🏁 How to run ?
 
-📄 Output Example
+From the control node, run:
+```
+# Option A: prompt for vault password interactively (recommended when using vault)
+ansible-playbook -i inventory.ini time_check.yml --ask-vault-pass
 
-When the playbook runs, it shows structured results for each server:
+# Option B: use a vault password file (no prompt)
+ansible-playbook -i inventory.ini time_check.yml --vault-password-file /path/to/ansible_vault_pass.txt
+```
 
-TASK [Display results] **************************************************
-ok: [APPSERVER] => {
-  "msg": [
-    "Time: 10/30/2025 11:20:12 AM",
-    "Timezone: Egypt Standard Time",
-    "W32Time Status: running"
-  ]
-}
+📄 Output
 
-🏁 Result
+The playbook writes per-host CSV files (one per host) to:
+``` /home/ans/windows-elham/results/ ```
+Then it creates the final consolidated file:
+``` /home/ans/windows-elham/results/time_check_results.csv ```
+CSV columns:
+```
+Server,Date,Timezone,W32Time_Status,StartType,ConnectionStatus
+```
+Example row:
+```
+APPSERVER,2025-10-30 11:20:12,Egypt Standard Time,Running,Auto,Reachable
+```
+Unreachable hosts will appear like:
+```
+CHILD-2,N/A,N/A,N/A,N/A,Unreachable
+```
 
-This automation reduced manual effort required to log into each Windows Server.
-The playbook now provides a quick, centralized way to:
 
-    Verify system time consistency across servers
 
-    Check timezone alignment
 
-    Ensure the Windows Time Service is running correctly
 
 🧠 Skills Demonstrated
 
