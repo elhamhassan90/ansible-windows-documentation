@@ -118,30 +118,84 @@ Developed an Ansible Playbook that retrieves:
 
     Windows Time Service (W32Time) status
 
+```
 ---
-- name: Collect Time and Service Info from Windows Servers
-  hosts: windows
+- name: Collect time, timezone, and W32Time info from selected Windows groups (unique hosts)
+  hosts: "servers-group1,servers-group2"
   gather_facts: no
+  ignore_unreachable: yes
+  vars:
+    output_dir: "/home/ans/windows-elham/results"
+  vars_prompt:
+    - name: ansible_vault_password
+      prompt: "Vault Password"
+      private: yes
+
   tasks:
-    - name: Get current time
-      win_command: powershell Get-Date
-      register: time_output
+    - name: Ensure output directory exists
+      file:
+        path: "{{ output_dir }}"
+        state: directory
+      delegate_to: localhost
 
-    - name: Get timezone
-      win_command: powershell Get-TimeZone
-      register: timezone_output
+    - block:
+        - name: Run PowerShell command on reachable hosts
+          ansible.windows.win_shell: |
+            $date = (Get-Date).ToString("yyyy-MM-dd HH:mm:ss")
+            $tz = tzutil /g
+            $service = Get-Service W32Time | Select-Object Status, StartType
+            Write-Output "$env:COMPUTERNAME,$date,$tz,$($service.Status),$($service.StartType),Reachable"
+          register: time_info
 
-    - name: Get Windows Time Service status
-      win_service_info:
-        name: W32Time
-      register: w32time_output
+        - name: Save reachable host result
+          copy:
+            content: "{{ time_info.stdout }}"
+            dest: "{{ output_dir }}/{{ inventory_hostname }}.csv"
+          delegate_to: localhost
 
-    - name: Display results
+      rescue:
+        - name: Save unreachable host result
+          copy:
+            content: "{{ inventory_hostname }},N/A,N/A,N/A,N/A,Unreachable"
+            dest: "{{ output_dir }}/{{ inventory_hostname }}.csv"
+          delegate_to: localhost
+
+
+- name: Combine all results into one CSV file
+  hosts: localhost
+  gather_facts: no
+  vars:
+    output_dir: "/home/ans/windows-elham/results"
+
+  tasks:
+    - name: Create CSV header
+      copy:
+        content: "Server,Date,Timezone,W32Time_Status,StartType,ConnectionStatus\n"
+        dest: "{{ output_dir }}/time_check_results.csv"
+
+    - name: Append data from each host file (unique servers only)
+      shell: |
+        cat {{ output_dir }}/*.csv | grep -v "Server,Date" | sort -t',' -k1,1 -u >> {{ output_dir }}/time_check_results.csv
+
+    - name: Clean up temporary host CSV files
+      file:
+        path: "{{ item }}"
+        state: absent
+      with_fileglob: "{{ output_dir }}/*.csv"
+      when: item != "{{ output_dir }}/time_check_results.csv"
+
+    - name: Show total unique servers
+      shell: awk -F',' 'NR>1{print $1}' {{ output_dir }}/time_check_results.csv | sort -u | wc -l
+      register: total_servers
+
+    - name: Show final result
       debug:
         msg:
-          - "Time: {{ time_output.stdout }}"
-          - "Timezone: {{ timezone_output.stdout }}"
-          - "W32Time Status: {{ w32time_output.services[0].state }}"
+          - "✅ Final CSV saved at {{ output_dir }}/time_check_results.csv"
+          - "🧮 Total unique servers: {{ total_servers.stdout }}"
+[ans@master-linux windows-elham]$
+```
+
 
 📄 Output Example
 
